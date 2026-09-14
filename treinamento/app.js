@@ -27,6 +27,7 @@
     for (let i = 0; i < n; i++) {
       const d = document.createElement("div");
       d.className = "holder";
+      d.setAttribute("aria-hidden", "true");
       d.innerHTML = "<div class='h-thumb'></div>";
       el.appendChild(d);
     }
@@ -35,7 +36,7 @@
 
   let dados;
   try {
-    const r = await fetch("modulos.json?v=11");
+    const r = await fetch("modulos.json?v=12");
     dados = await r.json();
     } catch {
     homeModulos.innerHTML = "<p>Falha ao carregar modulos.json. Rode <code>node scripts/unificar.js</code>.</p>";
@@ -73,8 +74,19 @@
     const f = getF();
     const pct = Math.round((f.length / (lista.length || 1)) * 100);
     barra.style.width = pct + "%";
+    barra.parentElement.setAttribute("aria-valuenow", String(pct));
     $("stPct").textContent = pct + "%";
     return f;
+  }
+  // mantém aria-selected das abas sincronizado com a aba visível
+  function syncTabs(view) {
+    document.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", String(t.dataset.view === view)));
+  }
+  // Enter/Espaço abre elementos clicáveis (cards, itens da grade)
+  function abreComTeclado(el, fn) {
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("role", "button");
+    el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(); } };
   }
   // card com thumb real do PDF + infos distribuídas
   function card(s, g, grande) {
@@ -127,7 +139,7 @@
       const { s, g } = prox;
       const b = document.createElement("div");
       b.className = "continue-banner";
-      b.innerHTML = "<img src='" + imgDe(s) + "' alt='continuar'>" +
+      b.innerHTML = "<img src='" + imgDe(s) + "' alt='Continuar: " + esc(s.titulo) + "'>" +
         "<div class='cb-info'><div class='tag'>" + esc(s.mod) + " · aula " + (g + 1) + "/" + lista.length + "</div>" +
         "<h3>" + esc(s.titulo) + "</h3><p>" + resumo(s.corpo) + "</p></div>" +
         "<button class='btn play' type='button'>▶ Continuar</button>";
@@ -143,10 +155,11 @@
       const pct = Math.round((ok / tot) * 100);
       const d = document.createElement("div");
       d.className = "mod-card home" + (mi === 1 ? " destaque-borda" : "");
-      d.innerHTML = "<div class='m-thumb' style=\"background-image:url('" + thumb(mi) + "')\"><span class='thumb-num'>M" + (mi + 1) + "</span><span class='m-tit'>" + esc(m.titulo) + "</span></div>" +
+      d.innerHTML = "<div class='m-thumb' role='img' aria-label='Capa do módulo " + esc(m.titulo) + "' style=\"background-image:url('" + thumb(mi) + "')\"><span class='thumb-num'>M" + (mi + 1) + "</span><span class='m-tit'>" + esc(m.titulo) + "</span></div>" +
         "<div class='m-bar'><i style='width:" + pct + "%'></i></div>" +
         "<div class='m-info'><span>" + ok + "/" + tot + " aulas · " + pct + "%</span><button class='btn-mini' type='button'>" + (ok === tot ? "Rever" : "Ver aulas") + "</button></div>";
       d.onclick = () => abrirModulo(mi);
+      abreComTeclado(d, () => abrirModulo(mi));
       homeModulos.appendChild(d);
     });
 
@@ -157,7 +170,7 @@
       const pct = Math.round((ok / tot) * 100);
       const d = document.createElement("div");
       d.className = "mod-card";
-      d.innerHTML = "<div class='m-thumb' style=\"background-image:url('" + thumb(mi) + "')\"><span class='thumb-num'>M" + (mi + 1) + "</span><span class='m-tit'>" + esc(m.titulo) + "</span></div>" +
+      d.innerHTML = "<div class='m-thumb' role='img' aria-label='Capa do módulo " + esc(m.titulo) + "' style=\"background-image:url('" + thumb(mi) + "')\"><span class='thumb-num'>M" + (mi + 1) + "</span><span class='m-tit'>" + esc(m.titulo) + "</span></div>" +
         "<div class='m-bar'><i style='width:" + pct + "%'></i></div>" +
         "<ul>" + m.secoes.map((s) => {
           const g = lista.findIndex((x) => x.id === s.id);
@@ -168,11 +181,16 @@
       head.style.cssText = "padding:10px 14px 0;color:var(--muted);font-size:.78rem";
       head.textContent = ok + "/" + tot + " aulas · " + pct + "% · clique na capa p/ checklist";
       d.insertBefore(head, d.querySelector("ul"));
-      d.querySelector(".m-thumb").style.cursor = "pointer";
-      d.querySelector(".m-thumb").onclick = () => abrirModulo(mi);
+      const capa = d.querySelector(".m-thumb");
+      capa.style.cursor = "pointer";
+      capa.onclick = () => abrirModulo(mi);
+      abreComTeclado(capa, () => abrirModulo(mi));
       grade.appendChild(d);
     });
-    grade.querySelectorAll("li").forEach((li) => li.onclick = () => abrir(parseInt(li.dataset.g, 10)));
+    grade.querySelectorAll("li").forEach((li) => {
+      li.onclick = () => abrir(parseInt(li.dataset.g, 10));
+      abreComTeclado(li, () => abrir(parseInt(li.dataset.g, 10)));
+    });
   }
 
   // fontes por módulo (só links reais já usados no treinamento)
@@ -199,6 +217,7 @@
   function abrirModulo(mi) {
     const m = dados.modulos[mi];
     document.querySelectorAll(".tab").forEach((t) => t.classList.remove("ativo"));
+    syncTabs("");
     ["view-inicio", "view-modulos", "view-aula", "view-anotacoes", "view-fontes", "view-modulo"].forEach((v) => $(v).classList.add("hidden"));
     $("view-modulo").classList.remove("hidden");
     mostrarHero(false);
@@ -216,6 +235,7 @@
       }).join("") + "</div>";
     $("btnVoltarMod").onclick = () => {
       document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("ativo", t.dataset.view === "inicio"));
+      syncTabs("inicio");
       ["view-modulo"].forEach((v) => $(v).classList.add("hidden"));
       $("view-inicio").classList.remove("hidden");
       mostrarHero(true);
@@ -239,6 +259,7 @@
     const s = lista[g];
     const feito = getF().includes(s.id);
     document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("ativo", t.dataset.view === "aula"));
+    syncTabs("aula");
     ["view-inicio", "view-modulos", "view-anotacoes", "view-fontes", "view-modulo"].forEach((v) => $(v).classList.add("hidden"));
     $("view-aula").classList.remove("hidden");
     const primeiraDoModulo = dados.modulos[s.mi].secoes[0].id === s.id;
@@ -279,6 +300,7 @@
   document.querySelectorAll(".tab").forEach((t) => t.onclick = () => {
     document.querySelectorAll(".tab").forEach((x) => x.classList.remove("ativo"));
     t.classList.add("ativo");
+    syncTabs(t.dataset.view);
     ["view-inicio", "view-modulos", "view-aula", "view-anotacoes", "view-fontes", "view-modulo"].forEach((v) => $(v).classList.add("hidden"));
     $("view-" + t.dataset.view).classList.remove("hidden");
     mostrarHero(t.dataset.view === "inicio");

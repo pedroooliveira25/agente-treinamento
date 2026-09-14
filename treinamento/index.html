@@ -3,34 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Treinamento unificado PathBit: do prompt ao harness em 8 módulos curtos, com progresso, anotações e fontes oficiais.">
+<meta name="theme-color" content="#06060c">
 <title>PathBit — Treinamento unificado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
-<div class="bg"></div>
+<a class="skip" href="#conteudo-principal">Pular para o conteúdo</a>
+<div class="bg" aria-hidden="true"></div>
 <header class="topo">
   <div class="marca">
-    <div class="marca-bar"></div>
+    <div class="marca-bar" aria-hidden="true"></div>
     <div><strong>PATHBIT</strong></div>
   </div>
-  <nav class="tabs">
-    <button class="tab ativo" data-view="inicio" type="button">Início</button>
-    <button class="tab" data-view="modulos" type="button">Módulos</button>
-    <button class="tab" data-view="aula" type="button">Aula</button>
-    <button class="tab" data-view="anotacoes" type="button">Anotações <span id="notasCount" class="pill">0</span></button>
-    <button class="tab" data-view="fontes" type="button">Fontes</button>
+  <nav class="tabs" role="tablist" aria-label="Navegação do treinamento">
+    <button class="tab ativo" data-view="inicio" type="button" role="tab" aria-selected="true" aria-controls="view-inicio" id="tab-inicio">Início</button>
+    <button class="tab" data-view="modulos" type="button" role="tab" aria-selected="false" aria-controls="view-modulos" id="tab-modulos">Módulos</button>
+    <button class="tab" data-view="aula" type="button" role="tab" aria-selected="false" aria-controls="view-aula" id="tab-aula">Aula</button>
+    <button class="tab" data-view="anotacoes" type="button" role="tab" aria-selected="false" aria-controls="view-anotacoes" id="tab-anotacoes">Anotações <span id="notasCount" class="pill">0</span></button>
+    <button class="tab" data-view="fontes" type="button" role="tab" aria-selected="false" aria-controls="view-fontes" id="tab-fontes">Fontes</button>
   </nav>
-  <div class="busca-wrap">
-    <span class="lupa">⌕</span>
+  <div class="busca-wrap" role="search">
+    <span class="lupa" aria-hidden="true">⌕</span>
+    <label class="sr-only" for="busca">Buscar aula, módulo ou tema. Pressione Enter para abrir o primeiro resultado.</label>
     <input id="busca" type="search" placeholder="Buscar aula, módulo, PoC…" autocomplete="off">
-    <kbd>↵</kbd>
+    <kbd aria-hidden="true">↵</kbd>
   </div>
 </header>
 
-<section class="hero" id="hero">
+<main id="conteudo-principal" tabindex="-1">
+<section class="hero" id="hero" aria-label="Apresentação do treinamento">
   <div class="hero-txt">
     <div class="selo">PATH IA FOR DEVS · 2026</div>
     <h1>Do prompt ao harness.</h1>
@@ -49,46 +54,46 @@
     <div class="stat"><strong id="stPct">0%</strong><span>concluído</span></div>
   </div>
 </section>
-<div class="progresso"><div id="barraProgresso"></div></div>
+<div class="progresso" role="progressbar" aria-label="Progresso do treinamento" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="barraProgresso"></div></div>
 
-<main id="view-inicio" class="view">
-  <section class="secao">
-    <div class="secao-head"><span class="secao-num">▶</span><h2 class="row-titulo" style="margin:0">Continue de onde parou</h2><span class="cont">1 próxima aula</span></div>
-    <div class="secao-linha"></div>
+<section id="view-inicio" class="view" role="tabpanel" aria-labelledby="tab-inicio" tabindex="0">
+  <section class="secao" aria-label="Continue de onde parou">
+    <div class="secao-head"><span class="secao-num" aria-hidden="true">▶</span><h2 class="row-titulo" style="margin:0">Continue de onde parou</h2><span class="cont">1 próxima aula</span></div>
+    <div class="secao-linha" aria-hidden="true"></div>
     <div id="rowContinue"></div>
   </section>
-  <section class="secao">
-    <div class="secao-head"><span class="secao-num">01–08</span><h2 class="row-titulo" style="margin:0">Os 8 módulos</h2><span class="cont">trilhas principais</span></div>
-    <div class="secao-linha"></div>
+  <section class="secao" aria-label="Os 8 módulos">
+    <div class="secao-head"><span class="secao-num" aria-hidden="true">01–08</span><h2 class="row-titulo" style="margin:0">Os 8 módulos</h2><span class="cont">trilhas principais</span></div>
+    <div class="secao-linha" aria-hidden="true"></div>
     <p class="sub">Escolha uma trilha para começar — sem poluição, um passo por vez.</p>
     <div id="homeModulos" class="grade"></div>
   </section>
-</main>
+</section>
 
-<main id="view-modulos" class="view hidden">
+<section id="view-modulos" class="view hidden" role="tabpanel" aria-labelledby="tab-modulos" tabindex="0">
   <h2 class="row-titulo">Todos os módulos</h2>
   <p class="sub">8 trilhas · clique numa aula para abrir</p>
   <div id="gradeModulos" class="grade"></div>
-</main>
+</section>
 
-<main id="view-modulo" class="view hidden">
+<section id="view-modulo" class="view hidden" aria-label="Checklist do módulo">
   <div id="moduloDetalhe"></div>
-</main>
+</section>
 
-<main id="view-aula" class="view hidden">
+<section id="view-aula" class="view hidden" role="tabpanel" aria-labelledby="tab-aula" tabindex="0">
   <article id="conteudo" class="aula card"></article>
-  <div class="navegacao">
+  <nav class="navegacao" aria-label="Navegação da aula">
     <button id="btnModulo" class="btn ghost" type="button">← Módulo</button>
     <button id="btnAnt" class="btn secundario" type="button">← Anterior</button>
     <button id="btnFeito" class="btn primario" type="button">Marcar concluída ✓</button>
     <button id="btnProx" class="btn secundario" type="button">Próxima →</button>
-  </div>
-</main>
+  </nav>
+</section>
 
-<main id="view-anotacoes" class="view hidden">
-  <section class="secao">
-    <div class="secao-head"><span class="secao-num">✎</span><h2 class="row-titulo" style="margin:0">Minhas anotações</h2><span class="cont">salvas no navegador</span></div>
-    <div class="secao-linha"></div>
+<section id="view-anotacoes" class="view hidden" role="tabpanel" aria-labelledby="tab-anotacoes" tabindex="0">
+  <section class="secao" aria-label="Minhas anotações">
+    <div class="secao-head"><span class="secao-num" aria-hidden="true">✎</span><h2 class="row-titulo" style="margin:0">Minhas anotações</h2><span class="cont">salvas no navegador</span></div>
+    <div class="secao-linha" aria-hidden="true"></div>
     <div class="nota-nova">
       <textarea id="notaTexto" rows="3" placeholder="Escreva aqui… ex: PoC1 rodar verify antes do apply"></textarea>
       <div class="nota-acoes">
@@ -98,12 +103,12 @@
     </div>
     <div id="listaNotas" class="notas"></div>
   </section>
-</main>
+</section>
 
-<main id="view-fontes" class="view hidden">
-  <section class="secao">
-    <div class="secao-head"><span class="secao-num">🔗</span><h2 class="row-titulo" style="margin:0">Fontes do treinamento</h2><span class="cont">9 links oficiais</span></div>
-    <div class="secao-linha"></div>
+<section id="view-fontes" class="view hidden" role="tabpanel" aria-labelledby="tab-fontes" tabindex="0">
+  <section class="secao" aria-label="Fontes do treinamento">
+    <div class="secao-head"><span class="secao-num" aria-hidden="true">🔗</span><h2 class="row-titulo" style="margin:0">Fontes do treinamento</h2><span class="cont">9 links oficiais</span></div>
+    <div class="secao-linha" aria-hidden="true"></div>
     <p class="sub">Benchmarks, arenas, conteúdos PathBit e onboarding da licença — tudo clicável, abre em nova aba.</p>
     <h3 class="grupo-titulo">Benchmarks & arenas</h3>
     <div class="fontes">
@@ -128,6 +133,7 @@
       <a class="fonte destaque" href="https://www.linkedin.com/newsletters/path-insights-7265451057395224578/" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-linkedin.png" alt="linkedin"><div><strong>Path Insights</strong><span>newsletter quinzenal · 8 artigos no módulo 8</span></div></a>
     </div>
   </section>
+</section>
 </main>
 
 <footer class="rodape">
@@ -138,27 +144,33 @@
       <span class="rod-tag">#FaleComAPath</span>
     </div>
     <div class="rod-col">
-      <h4>Treinamento</h4>
+      <h2>Treinamento</h2>
+      <nav aria-label="Seções do treinamento">
       <button data-go="inicio" type="button">Início</button>
       <button data-go="modulos" type="button">Módulos</button>
       <button data-go="anotacoes" type="button">Anotações</button>
       <button data-go="fontes" type="button">Fontes</button>
+      </nav>
     </div>
     <div class="rod-col">
-      <h4>Fontes</h4>
+      <h2>Fontes</h2>
+      <nav aria-label="Links de fontes">
       <a href="https://llm-stats.com/benchmarks/swe-bench-verified" target="_blank" rel="noopener">SWE-bench Verified</a>
       <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a>
       <a href="https://github.com/pathbit/pathbit-ai-for-devs" target="_blank" rel="noopener">pathbit-ai-for-devs</a>
       <a href="https://www.linkedin.com/newsletters/path-insights-7265451057395224578/" target="_blank" rel="noopener">Newsletter Path Insights</a>
+      </nav>
     </div>
     <div class="rod-col">
-      <h4>Contato</h4>
+      <h2>Contato</h2>
+      <address>
       <a href="mailto:tecnologia@pathbit.com.br">tecnologia@pathbit.com.br</a>
       <a href="https://www.pathbit.com.br" target="_blank" rel="noopener">www.pathbit.com.br</a>
+      </address>
     </div>
   </div>
   <div class="rod-base"><small>© 2026 PathBit · <code>node scripts/unificar.js</code> regenera as aulas a partir de <code>slides/*.txt</code>.</small></div>
 </footer>
-<script src="app.js?v=11"></script>
+<script src="app.js?v=12"></script>
 </body>
 </html>
