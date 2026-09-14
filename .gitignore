@@ -9,3 +9,5 @@ package-lock.json
 .auth.json
 .state.json
 erro.log
+
+.vercel
