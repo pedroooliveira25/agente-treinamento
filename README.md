@@ -1,4 +1,4 @@
-# agente-instalacao-treinamento
+# agente-treinamento
 
 Agente de instalação + instruções unificadas em ambiente de treinamento.
 Nasceu dos slides `pathbit_evolucao_agentes_ia.pdf` (Google Drive) para não ficar cansativo: tudo vira módulos curtos navegáveis.
