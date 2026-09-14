@@ -1,0 +1,22 @@
+Neste módulo você vai aprender a economia da inferência: comparar preço x performance no OpenRouter, o teto de custo por 1M de tokens (Claude x DeepSeek x ClaudeGravity zero) e por que "o melhor virou um pelotão".
+
+## OpenRouter — preço x performance
+Comparativo de 4 modelos (GPT Atlas Latest, Claude Fable 5.1, Gemini 3.8 Flash, Kimi K3). Blocos Pricing (Output, Cached input, Weighted Average, Cache Write, Web Search, Image/Audio input em US$/M tokens) e Performance (Latency p50, Throughput p50).
+O que observar: não é só o preço do token de saída — input com cache, escrita de cache e latência p50 mudam a conta e a experiência. Um modelo barato com latência alta pode ser pior para agente interativo do que um médio e rápido.
+Dica de sala: se for demonstrar, abra o OpenRouter ao vivo em vez do print — os preços mudam e a turma aprende a comparar sozinha. O print do slide é ilustrativo.
+
+## Arenas e design
+Em tarefas abertas a história se repete: Kimi K3 lidera o Design Arena com 1357 ELO, à frente de Claude Fable 5.1 com 1323.
+DESIGN ARENA ELO: em design e texto criativo, todos os de fronteira entregam nível profissional.
+Gráfico: Kimi K3 1357, Muse Spark 1.2 1325, Claude Fable 5.1 1323.
+A leitura aqui é libertadora: para tarefas criativas e de design, qualquer modelo de fronteira já entrega nível profissional — então escolha pelo custo e pelo fluxo, não pela marca. Fontes: arena.ai e designarena.ai. Boa âncora para exercícios de design e texto criativo na turma.
+
+## Custo por token
+Inferência de ponta custa caro por token. Ou nada, dependendo da arquitetura.
+TETO US$/1M TOKENS: Claude US$ 3 a 15, DeepSeek US$ 0,14 a 2,19, ClaudeGravity US$ 0 (cota AI Pro).
+Gráfico: Claude nativo 15, DeepSeek API 2.19, ClaudeGravity 0.
+Entenda a jogada: o ClaudeGravity troca token pago por cota da conta Google AI Pro — mesmo motor de harness (Claude Code), inferência via Gemini com 1M de contexto, custo extra zero. É a âncora econômica das PoCs 2 e 3 e o motivo pelo qual a licença Gemini (módulo 7) vale ouro.
+
+## Use sempre o melhor
+O melhor virou um pelotão. Frase-ponte para o hands-on: multi-modelo por padrão, decide no caso de uso e no custo.
+Leve essa frase para o dia a dia: configure a cascata uma vez e deixe o gateway escolher o melhor disponível a cada chamada. A partir daqui o treinamento sai da teoria e entra nas 3 PoCs — autonomia, inferência e resiliência.

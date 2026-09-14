@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.lock
+package-lock.json
+.env
+.env.*
+*.pem
+*.key
+.auth.json
+.state.json
+erro.log

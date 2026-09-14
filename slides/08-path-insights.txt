@@ -1,0 +1,41 @@
+Neste módulo você vai aprender com a newsletter **Path Insights**: 8 artigos quinzenais da Pathbit — cada aula traz o resumo direto e o botão para o conteúdo completo no LinkedIn.
+
+## Arquiteturas cognitivas do designer contemporâneo
+- Publicado em **3 de jun. de 2026**
+- **Resumo:** como os modelos **T-Shaped, Pi-Shaped e Comb-Shaped** estão redefinindo o mercado criativo — da crise do especialista vertical à polimatia aplicada das lideranças criativas, com guia prático para descobrir sua arquitetura.
+- Link: https://pt.linkedin.com/pulse/arquiteturas-cognitivas-do-designer-contempor%C3%A2neo-pathbit-qvmof
+
+## LLM Evals e Regressão
+- Publicado em **6 de mai. de 2026** · continua o artigo de Prompt Engineering
+- **Resumo:** comparar respostas é curto — o runner compara **3 candidatos completos** (Qwen genérico, Qwen estruturado, FLAN estruturado) com score ponderado por criticidade e **gate de release**: liderou com 1.357, mas 2 regressões críticas reprovaram o deploy.
+- Link: https://pt.linkedin.com/pulse/llm-evals-na-pr%C3%A1tica-e-como-escolher-candidatos-detectar-regress%C3%A3o-fvp1f
+
+## Design e IA — chega de evitar
+- Publicado em **8 de abr. de 2026**
+- **Resumo:** o medo diante de Figma AI, Claude Code, Lovable e Stitch é legítimo, mas paralisar não é opção — **roteiro em 5 passos** (experimentar, fundamentos, prompts, incorporar no fluxo, acompanhar mercado) + 3 perguntas que valem mais que curso.
+- Link: https://pt.linkedin.com/pulse/design-ia-chega-de-evitar-%C3%A9-hora-aprender-e-usar-pathbit-d20cf
+
+## Prompt engineering avançado
+- Publicado em **18 de mar. de 2026**
+- **Resumo:** laboratório **modelo x estratégia** com contrato de saída rígido em 3 linhas — Qwen few_shot **+80,2%**, FLAN checklist **+72,6%**: o ganho depende da combinação. Sequência: prompt → RAG → fine-tuning.
+- Link: https://pt.linkedin.com/pulse/prompt-engineering-avan%C3%A7ado-como-medir-estrat%C3%A9gia-modelo-e-ganho-uagdf
+
+## Todo programador deveria aprender System Design
+- Publicado em **28 de jan. de 2026**
+- **Resumo:** **80% dos problemas em produção são de arquitetura** — DNS, load balancer, scale up vs out, cache (latência ÷100x), SQL vs NoSQL, sharding, microsserviços, filas, CQRS e o caso WhatsApp.
+- Link: https://pt.linkedin.com/pulse/todo-programador-deveria-aprender-system-design-pathbit-vlm5f
+
+## Code review com IA
+- Publicado em **9 de jan. de 2026**
+- **Resumo:** revisão assistida virou mainstream — **87% menos tempo**, ROI de **400%** no ano 1 — com os 5 gargalos do manual, os 4 super-poderes da IA e análise de **8 ferramentas** (CodeRabbit, CodeGuru, Snyk, Kodus) com pricing e decisão.
+- Link: https://pt.linkedin.com/pulse/revolu%C3%A7%C3%A3o-code-review-com-ia-pathbit-qiycf
+
+## Git avançado para devs
+- Publicado em **10 de dez. de 2025**
+- **Resumo:** do "fix, fix2, final final" ao domínio — **stash** paralelo, **rebase interativo**, switch/restore, **reflog** como desfazer definitivo e cherry-pick cirúrgico, com regras de ouro e comandos para praticar.
+- Link: https://www.linkedin.com/pulse/t%C3%A9cnicas-avan%C3%A7adas-git-para-devs-pathbit-5q0qe
+
+## RAG ou Fine-Tuning
+- Publicado em **26 de nov. de 2025**
+- **Resumo:** a resposta errada **custa meses e milhares de dólares** — RAG (biblioteca viva, R$ 0–350/mês) vs fine-tuning (especialista treinado, R$ 2.600–17.000) vs híbrido, com exemplos e os **5 erros mortais**.
+- Link: https://www.linkedin.com/pulse/rag-ou-fine-tuning-escolha-que-pode-salvar-afundar-seu-projeto-efbmf

@@ -1,0 +1,42 @@
+Neste módulo você vai aprender resiliência de inferência: o ClaudeGravity (Claude Code + Gemini via 9Router, 1M de contexto, custo zero), o arsenal de fallback em cascata e os roteiros das PoCs 2 e 3.
+
+## Claude Gravity
+O harness do Claude Code com os Gemini da sua conta Google AI Pro, via gateway 9Router: protocolo, OAuth e RTK.
+1 milhão de tokens de contexto, US$ 0 de inferência extra.
+Conteúdo completo: github.com/pathbit/pathbit-ai-for-devs
+Entenda a arquitetura: o Claude Code continua sendo o harness (planejar, executar, validar, commitar), mas a inferência passa a sair dos modelos Gemini da sua conta Google AI Pro, roteados pelo gateway 9Router. O ganho duplo é contexto gigante (1M) com custo extra zero, porque você usa cota em vez de token pago.
+Diagrama do slide: roteamento de modelos Gemini e Claude via 9Router.
+Atenção: exige conta Google AI Pro com OAuth configurado no gateway — sem inventar chaves, o passo a passo está no repositório e a licença se pede no módulo 7.
+
+## PoC 2 — claudegravity (15 min)
+Vamos subir o gateway 9Router, conectar a conta Google AI Pro e validar a ponte de ponta a ponta.
+O que vamos fazer: Claude Code rodando em Gemini 3.8 com 1M de contexto, sem gastar token de API.
+O momento mágico é o PONG do `test_gateway.py`: ele prova que a ponte está de pé antes de qualquer tarefa real. Depois disso, o combo claudegravity-fallback deixa a sessão resiliente desde o nascimento. É a PoC que transforma a economia do módulo 4 em realidade operacional.
+
+## Roteiro PoC 2
+1. `docker compose up -d`
+2. `test_gateway.py` retorna PONG
+3. combo claudegravity-fallback
+4. OAuth antigravity no dashboard (manual no browser)
+5. `claude --model ag/gemini-3.8-flash-high`
+6. `keep_connected.py --daemon`
+Detalhes que evitam tropeço: o OAuth é manual no dashboard (não dá para automatizar o login Google), e o daemon `keep_connected` mantém a sessão viva. Se o PONG não vier, pare aqui e diagnostique o gateway antes de seguir — não adianta subir o Claude em cima de ponte quebrada.
+
+## Arsenal de fallback
+9 fontes mapeadas, 5 integradas: Antigravity, OpenRouter, Groq, Mistral e Ollama local, em combos com cascata automática.
+Cota estourou? O gateway salta de nível e a sessão não cai.
+Pense no arsenal como andares de um prédio: o gateway tenta o andar de cima e, se a cota estourou ou o provedor falhou, desce sozinho para o próximo — a sessão continua de onde parou. Atenção ao vocabulário: 9 fontes foram mapeadas, mas 5 estão integradas de verdade; as demais são reserva mapeada, não ativa. O Ollama local é o térreo: sempre disponível como última barreira.
+
+## PoC 3 — resiliência (15 min)
+Vamos provocar falhas reais, 429 e logout, e provar que a sessão do Claude Code não cai.
+O que vamos fazer: a cascata salta sozinha entre 5 provedores, e o Ollama local garante o piso.
+Essa é a PoC mais divertida de apresentar: em vez de torcer para nada quebrar, você quebra de propósito e mostra a sessão sobrevivendo. O 429 simula cota estourada e o 401/logout simula credencial inválida — os dois casos reais que mais derrubam sessões em produção. Ver o salto automático acontecer ao vivo vende o conceito melhor que qualquer slide.
+
+## Roteiro PoC 3
+1. `setup_combos.py` (5 provedores)
+2. `simulate_fallback.py` (429/401)
+3. `claude --model arsenal-supremo`
+4. `test_arsenal.py` nível a nível
+5. salto de combo no dashboard
+6. ollama como última barreira (precisa estar instalado local)
+As falhas são simuladas de propósito — avise a turma antes para ninguém se assustar. Pré-requisito real: Ollama instalado e com um modelo baixado, senão o último degrau da cascata não existe. No fim, a turma deve saber diagnosticar nível a nível com o `test_arsenal.py` e forçar o salto de combo pelo dashboard.

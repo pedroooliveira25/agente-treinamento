@@ -1,0 +1,27 @@
+Neste módulo você vai aprender a tese do treinamento: os 3 estágios da evolução (texto → contexto → ambiente), por que RAG e memória superaram o prompt perfeito, o que é o harness e o loop planejar → executar → validar → commitar que rege todas as PoCs.
+
+## A tese em uma frase
+A evolução dos agentes vai do prompt ao harness: três estágios, um gargalo cada — o texto que escrevemos, o contexto que damos ao modelo e o ambiente onde ele executa.
+Pense assim: primeiro o gargalo era escrever bem (prompt), depois passou a ser alimentar bem (contexto) e hoje é operar bem (ambiente). Quem entende essa tese entende por que este treinamento existe: ele opera na terceira camada, a que realmente transforma modelo em engenheiro.
+
+## 2022 prompts
+Few-shot, CoT (chain-of-thought), roles. O gargalo era o texto: o prompt perfeito.
+Na época, o jogo era dar exemplos (few-shot), pedir raciocínio passo a passo (CoT) e definir papéis (roles como "você é um senior"). Funcionava para tarefas curtas, mas quebrava em trabalho real: bastava a conversa alongar para o modelo perder o fio. A lição que fica: prompt bom é necessário, mas nunca foi suficiente.
+
+## 2024 contexto
+RAG, memória, tools. De 2023 a 2025 a pergunta virou "o que entra na janela?". RAG, memória e tool use passaram a valer mais que o prompt perfeito.
+A pilha da janela ficou assim: system prompt -> memória da sessão -> RAG com documentos do repo -> tool use com saída de comandos. Tudo isso dentro de janelas de até 1M de tokens.
+Na prática: quem monta bem o contexto (repo indexado, memória persistente, ferramentas ligadas) extrai muito mais do mesmo modelo do que quem só capricha no prompt.
+
+## O gargalo da sessão
+Contexto morria na sessão: trabalho real exige execução longa, paralela e auditável. O gargalo migrou para a infra ao redor do modelo.
+Sessões de chat somem, não rodam em paralelo e não deixam rastro auditável. Código real precisa do oposto: rodar por horas, tentar vários caminhos ao mesmo tempo e registrar cada decisão. É por isso que o gargalo saiu do texto e foi para a infraestrutura — permissões, orquestração, logs, retries. Essa infra tem nome: harness.
+
+## 2025 harness
+Frameworks, fallback. Em 2025+ o diferencial é o ambiente ao redor do modelo: permissões, ferramentas, orquestração e resiliência de inferência.
+O harness é a camada que transforma modelo em engenheiro de verdade. Nossos conteúdos operam exatamente nesta camada.
+Ou seja: o modelo sugere, mas é o harness que deixa ele ler o repo, rodar comandos, validar com testes, commitar e — se a cota estourar — trocar de provedor sem derrubar a sessão. Dominar essa camada é o objetivo das PoCs deste treinamento.
+
+## O loop do agente
+PLANEJAR -> EXECUTAR -> VALIDAR -> COMMIT, com retorno "se quebrou, refaz o plano". Tags: permissões, ferramentas, fallback multi-provedor.
+Esse é o batimento cardíaco de todo agente sério: ele planeja a tarefa, executa com as ferramentas liberadas, valida o resultado (testes, lint, build) e só então commita. Se qualquer etapa quebrar, ele volta ao plano em vez de insistir no erro. Guarde esse loop — as PoCs 1, 2 e 3 são ele rodando na prática, cada uma numa camada: autonomia, inferência e resiliência.

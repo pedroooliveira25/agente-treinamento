@@ -1,0 +1,14 @@
+{
+  "name": "agente-instalacao-treinamento",
+  "version": "0.1.0",
+  "description": "Agente de instalacao + ambiente de treinamento unificado (slides -> modulos)",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "agente": "node agente.js --help",
+    "unificar": "node scripts/unificar.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

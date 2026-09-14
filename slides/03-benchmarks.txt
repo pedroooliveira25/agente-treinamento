@@ -1,0 +1,29 @@
+Neste módulo você vai aprender a ler benchmarks sem autoengano: SWE-bench Verified, os 3 gráficos da Artificial Analysis (score, custo, índice) e os leaderboards da LLM-stats — e a decidir pelo caso de uso, não pelo ranking.
+
+## SWE-bench Verified
+Claude lidera, mas o pelotão a ~80% é global: Google, DeepSeek, Alibaba e Moonshot empatados dentro de 0,4 ponto.
+SET/2026: 95% no topo, 80,2 a 80,6% no pelotão: a diferença real está no caso de uso.
+O que o benchmark mede: problemas reais do GitHub em repos Python open-source populares — o modelo lê o problema, entende a base e gera um patch funcional. É o padrão-ouro para agentes de código porque testa o ciclo completo, não só completar função.
+Como ler sem se enganar: olhe o topo para saber o teto, olhe o pelotão para saber o custo-benefício, e decida pelo seu caso de uso. Fontes vivas: llm-stats.com e swebench.com (veja a aba Fontes).
+
+## Artificial Analysis — score por benchmark
+Gráficos de Score by Benchmark (posição média, quanto maior melhor) nas séries DeepSWE v1.1, Terminal-Bench 4.0 e SWE-Atlas-QnA, com 13 de 13 modelos. Todos os componentes usam resultado binário (passou/não passou).
+O valor aqui é decompor o índice: um agente pode ser ótimo em terminal e médio em Q&A, e isso muda a escolha por tarefa. Dica de instrutor: apresente o gráfico como comparativo e mande a turma conferir os números exatos na fonte (artificialanalysis.ai), porque prints desatualizam rápido.
+
+## Artificial Analysis — custo por tarefa
+Gráfico Cost per Task (custo médio de API por tarefa em USD, quanto menor melhor): barras de ~US$ 0,24 até ~US$ 12,4, com intermediários na faixa de US$ 2 a 9. Variação maior que 50x entre agentes.
+Essa é a lâmina econômica do treinamento: o agente mais capaz pode custar 50x mais por tarefa que um intermediário. É esse gap que justifica o ClaudeGravity (custo zero via cota) e o arsenal de fallback. Quando alguém perguntar "por que tanto esforço de gateway?", a resposta está neste gráfico.
+
+## Artificial Analysis — índice x custo
+Gráfico Coding Agent Index vs Cost per Task: eixo X custo por tarefa (US$ 0 a 14), eixo Y índice (~38 a 65). Legenda Most attractive quadrant e linha de Pareto. Provedores: Anthropic, OpenAI, Meta, Z.ai, Moonshot AI, SpaceXAI, Alibaba Cloud, DeepSeek, Google. Pontos: Codex, Claude Code, Muse Code/Muse Spark, Kimi CLI, Grok Build, Qwen, Gemini, DeepSeek, Antigravity.
+Leitura prática: o quadrante mais atraente é alto índice a baixo custo — é ali que moram as combinações que este treinamento monta (fronteira via cota + fallback barato). Use este gráfico para ensinar trade-off: nunca escolha só pelo índice nem só pelo preço.
+
+## Artificial Analysis — índice agregado
+Incorpora 3 benchmarks (DeepSWE v1.1, Terminal-Bench 4.0, SWE-Atlas-QnA, quanto maior melhor): topo ~62 pontos (Claude Code Fable 5.1 e Codex GPT-6 Astra), depois 60, 55, 54, 54, 52, 47, 43, 43, 42.
+Aviso importante: nomes de agentes e modelos mudam a cada trimestre — valide sempre na fonte antes de instruir a turma. O índice serve para ordenar o pelotão, não para decorar número: o que importa é quem está no topo hoje e quem entrega 90% disso por 10% do custo.
+
+## LLM-stats coding e geral
+Aba Coding: barras de ~700 a 2500 pontos, combinando arenas em tempo real com benchmarks de geração de código, depuração e engenharia de software.
+Leaderboard 2026 GERAL: colunas Model U, LLM Stats, Reasoning, Coding, Agents, Context, Price $/M Tk, Speed e License, com ~20 linhas (GPT-5 Atlas, Claude Fable 5.1, GPT-5.6, Claude Mythos Preview, Claude Opus 5, Muse Spark 1.3, Claude Fable 5, Kimi K3, GLM, Qwen, DeepSeek).
+Aba CODING: a mesma tabela com a coluna Coding em destaque.
+Como usar em sala: tabela densa não se lê célula a célula — projete ao vivo, filtre por CODING e mostre como comparar contexto, preço e licença lado a lado. Fonte viva: llm-stats.com (Best AI for Coding 2026 e LLM Leaderboard 2026).

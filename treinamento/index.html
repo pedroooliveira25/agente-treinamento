@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PathBit — Treinamento unificado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11">
+</head>
+<body>
+<div class="bg"></div>
+<header class="topo">
+  <div class="marca">
+    <div class="marca-bar"></div>
+    <div><strong>PATHBIT</strong></div>
+  </div>
+  <nav class="tabs">
+    <button class="tab ativo" data-view="inicio" type="button">Início</button>
+    <button class="tab" data-view="modulos" type="button">Módulos</button>
+    <button class="tab" data-view="aula" type="button">Aula</button>
+    <button class="tab" data-view="anotacoes" type="button">Anotações <span id="notasCount" class="pill">0</span></button>
+    <button class="tab" data-view="fontes" type="button">Fontes</button>
+  </nav>
+  <div class="busca-wrap">
+    <span class="lupa">⌕</span>
+    <input id="busca" type="search" placeholder="Buscar aula, módulo, PoC…" autocomplete="off">
+    <kbd>↵</kbd>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-txt">
+    <div class="selo">PATH IA FOR DEVS · 2026</div>
+    <h1>Do prompt ao harness.</h1>
+    <p class="por">por Eliel Simoncelo</p>
+    <p>A evolução dos agentes em 8 módulos: linha do tempo, fronteira 2026, benchmarks, economia, Antigravity, ClaudeGravity, operação e Path Insights. Um card por vez, sem cansaço.</p>
+    <div class="hero-btns">
+      <button id="btnPlay" class="btn play" type="button">▶ Começar</button>
+      <button id="btnCheck" class="btn ghost" type="button">Checklist</button>
+      <button id="btnReset" class="btn ghost" type="button">Reiniciar</button>
+    </div>
+    <div class="hero-meta"><span id="origem">carregando aulas PathBit…</span></div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><strong id="stMod">–</strong><span>módulos</span></div>
+    <div class="stat"><strong id="stSec">–</strong><span>aulas</span></div>
+    <div class="stat"><strong id="stPct">0%</strong><span>concluído</span></div>
+  </div>
+</section>
+<div class="progresso"><div id="barraProgresso"></div></div>
+
+<main id="view-inicio" class="view">
+  <section class="secao">
+    <div class="secao-head"><span class="secao-num">▶</span><h2 class="row-titulo" style="margin:0">Continue de onde parou</h2><span class="cont">1 próxima aula</span></div>
+    <div class="secao-linha"></div>
+    <div id="rowContinue"></div>
+  </section>
+  <section class="secao">
+    <div class="secao-head"><span class="secao-num">01–08</span><h2 class="row-titulo" style="margin:0">Os 8 módulos</h2><span class="cont">trilhas principais</span></div>
+    <div class="secao-linha"></div>
+    <p class="sub">Escolha uma trilha para começar — sem poluição, um passo por vez.</p>
+    <div id="homeModulos" class="grade"></div>
+  </section>
+</main>
+
+<main id="view-modulos" class="view hidden">
+  <h2 class="row-titulo">Todos os módulos</h2>
+  <p class="sub">8 trilhas · clique numa aula para abrir</p>
+  <div id="gradeModulos" class="grade"></div>
+</main>
+
+<main id="view-modulo" class="view hidden">
+  <div id="moduloDetalhe"></div>
+</main>
+
+<main id="view-aula" class="view hidden">
+  <article id="conteudo" class="aula card"></article>
+  <div class="navegacao">
+    <button id="btnModulo" class="btn ghost" type="button">← Módulo</button>
+    <button id="btnAnt" class="btn secundario" type="button">← Anterior</button>
+    <button id="btnFeito" class="btn primario" type="button">Marcar concluída ✓</button>
+    <button id="btnProx" class="btn secundario" type="button">Próxima →</button>
+  </div>
+</main>
+
+<main id="view-anotacoes" class="view hidden">
+  <section class="secao">
+    <div class="secao-head"><span class="secao-num">✎</span><h2 class="row-titulo" style="margin:0">Minhas anotações</h2><span class="cont">salvas no navegador</span></div>
+    <div class="secao-linha"></div>
+    <div class="nota-nova">
+      <textarea id="notaTexto" rows="3" placeholder="Escreva aqui… ex: PoC1 rodar verify antes do apply"></textarea>
+      <div class="nota-acoes">
+        <span id="notaContexto" class="muted"></span>
+        <button id="btnNota" class="btn primario" type="button">Salvar anotação</button>
+      </div>
+    </div>
+    <div id="listaNotas" class="notas"></div>
+  </section>
+</main>
+
+<main id="view-fontes" class="view hidden">
+  <section class="secao">
+    <div class="secao-head"><span class="secao-num">🔗</span><h2 class="row-titulo" style="margin:0">Fontes do treinamento</h2><span class="cont">9 links oficiais</span></div>
+    <div class="secao-linha"></div>
+    <p class="sub">Benchmarks, arenas, conteúdos PathBit e onboarding da licença — tudo clicável, abre em nova aba.</p>
+    <h3 class="grupo-titulo">Benchmarks & arenas</h3>
+    <div class="fontes">
+      <a class="fonte" href="https://llm-stats.com/benchmarks/swe-bench-verified" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-llmstats.png" alt="llm-stats"><div><strong>SWE-bench Verified</strong><span>llm-stats.com · ranking por benchmark</span></div></a>
+      <a class="fonte" href="https://www.swebench.com/" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-swebench.png" alt="swebench"><div><strong>SWE-bench oficial</strong><span>swebench.com · definição e dataset</span></div></a>
+      <a class="fonte" href="https://artificialanalysis.ai/" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-aa.png" alt="artificial analysis"><div><strong>Artificial Analysis</strong><span>score, custo/tarefa e índice de agentes</span></div></a>
+      <a class="fonte" href="https://arena.ai/leaderboard" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-arena.png" alt="arena"><div><strong>Arena Leaderboard</strong><span>arena.ai · ELO em tarefas abertas</span></div></a>
+      <a class="fonte" href="https://www.designarena.ai/leaderboard" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-design.png" alt="design arena"><div><strong>Design Arena</strong><span>designarena.ai · ELO em design</span></div></a>
+    </div>
+    <h3 class="grupo-titulo">Conteúdos PathBit (passo a passo)</h3>
+    <div class="fontes">
+      <a class="fonte destaque" href="https://github.com/pathbit/pathbit-ai-for-devs/blob/master/0001_antigravity_acesso_total_irrestrito/article/ARTICLE.md" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-github.png" alt="github"><div><strong>Antigravity irrestrito</strong><span>PoC 1 · permissões Agent 2.0</span></div></a>
+      <a class="fonte destaque" href="https://github.com/pathbit/pathbit-ai-for-devs/blob/master/0002_claude_gravity_utilizando_9router/article/ARTICLE.md" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-github.png" alt="github"><div><strong>Claude Gravity via 9Router</strong><span>PoC 2 · gateway + cota AI Pro</span></div></a>
+    </div>
+    <h3 class="grupo-titulo">Licença Gemini (2 passos)</h3>
+    <div class="fontes">
+      <a class="fonte" href="https://sites.google.com/pathbit.co/ajuda/google/criar-conta-google?pli=1&authuser=0" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-google.png" alt="google"><div><strong>Passo 1 · Criar conta Google</strong><span>com e-mail Pathbit</span></div></a>
+      <a class="fonte fonte-qr" href="https://docs.google.com/forms/d/e/1FAIpQLSfxVz_0F4T8WCwz3cqNYs-cT-1ggRY9-Nrz379tBoJ1S85K3w/viewform" target="_blank" rel="noopener"><img src="thumbs/qr-licenca.png" alt="QR code da licença Gemini"><div><strong>Passo 2 · Solicitar licença</strong><span>form Google · logado com @pathbit · escaneie ou clique</span></div></a>
+    </div>
+    <h3 class="grupo-titulo">Newsletter Path Insights</h3>
+    <div class="fontes">
+      <a class="fonte destaque" href="https://www.linkedin.com/newsletters/path-insights-7265451057395224578/" target="_blank" rel="noopener"><img class="f-logo" src="thumbs/fontes/f-linkedin.png" alt="linkedin"><div><strong>Path Insights</strong><span>newsletter quinzenal · 8 artigos no módulo 8</span></div></a>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="rod-grid">
+    <div class="rod-col">
+      <div class="rod-marca"><div class="marca-bar"></div><strong>PATHBIT</strong></div>
+      <p>Treinamento unificado · do prompt ao harness.<br>Modelos vão e vêm, a arquitetura fica.</p>
+      <span class="rod-tag">#FaleComAPath</span>
+    </div>
+    <div class="rod-col">
+      <h4>Treinamento</h4>
+      <button data-go="inicio" type="button">Início</button>
+      <button data-go="modulos" type="button">Módulos</button>
+      <button data-go="anotacoes" type="button">Anotações</button>
+      <button data-go="fontes" type="button">Fontes</button>
+    </div>
+    <div class="rod-col">
+      <h4>Fontes</h4>
+      <a href="https://llm-stats.com/benchmarks/swe-bench-verified" target="_blank" rel="noopener">SWE-bench Verified</a>
+      <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a>
+      <a href="https://github.com/pathbit/pathbit-ai-for-devs" target="_blank" rel="noopener">pathbit-ai-for-devs</a>
+      <a href="https://www.linkedin.com/newsletters/path-insights-7265451057395224578/" target="_blank" rel="noopener">Newsletter Path Insights</a>
+    </div>
+    <div class="rod-col">
+      <h4>Contato</h4>
+      <a href="mailto:tecnologia@pathbit.com.br">tecnologia@pathbit.com.br</a>
+      <a href="https://www.pathbit.com.br" target="_blank" rel="noopener">www.pathbit.com.br</a>
+    </div>
+  </div>
+  <div class="rod-base"><small>© 2026 PathBit · <code>node scripts/unificar.js</code> regenera as aulas a partir de <code>slides/*.txt</code>.</small></div>
+</footer>
+<script src="app.js?v=11"></script>
+</body>
+</html>

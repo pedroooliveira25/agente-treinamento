@@ -1,0 +1,19 @@
+Neste módulo você vai aprender o que é a fronteira de modelos em 2026: os 6 labs do pelotão, a arquitetura em dois papéis (elite como motor, abertos como rede de segurança) e por que operar em cascata multi-modelo em vez de casar com um modelo.
+
+## O que é fronteira
+Fronteira é o pelotão dos modelos mais avançados, dos grandes labs: Anthropic, OpenAI, Google, Z.ai, Alibaba e Moonshot.
+Não-fronteira: abertos e locais (GPT-OSS, Qwen, Ollama) são a rede de segurança, não o motor.
+Na prática: fronteira no topo da cascata, abertos no piso.
+A ideia central é simples: existe um grupo de elite (a fronteira) que puxa a qualidade máxima, e existe a base aberta/local que garante que você nunca fica parado. Um sem o outro é arriscado — só elite quebra no custo e na cota, só base perde qualidade. O treinamento inteiro assume essa divisão.
+
+## Dois papéis, uma arquitetura
+MODELOS DE FRONTEIRA (motor principal): Claude, GPT, Gemini, GLM, Qwen, Kimi (Anthropic, OpenAI, Google, Z.ai, Alibaba, Moonshot).
+Cascata de fallback no meio.
+ABERTOS E LOCAIS (rede de segurança): GPT-OSS 120B, Qwen Coder, Ollama.
+Visualize uma cascata: a requisição entra pelo topo (o melhor modelo disponível no momento) e, se falhar — cota, 429, logout — ela desce de nível automaticamente até o piso local. O Ollama no seu PC é o último degrau: lento perto da elite, mas sempre disponível e de graça. As PoCs 2 e 3 montam exatamente essa cascata.
+
+## A fronteira 2026
+Seis fornecedores no topo, capacidades equivalentes na prática, e a liderança trocando de mãos a cada trimestre.
+No topo hoje: claude anthropic, gpt openai, gemini google, glm z.ai, qwen alibaba, kimi moonshot.
+Moral: não casar com um modelo — treino é multi-modelo.
+Isso muda tudo na hora de estudar e operar: em vez de decorar um modelo, aprenda a operar a cascata. Os benchmarks do próximo módulo provam o ponto — a diferença no topo é pequena e o que decide é caso de uso e custo, não marca.

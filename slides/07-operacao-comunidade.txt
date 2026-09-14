@@ -1,0 +1,26 @@
+Neste módulo você vai aprender a operar com a comunidade: a iniciativa Path AI, onde aprofundar (repositório e fontes), a mensagem de fechamento e o passo a passo da licença Gemini em 2 etapas.
+
+## Path AI
+A iniciativa Pathbit para o ecossistema de IA: conteúdos abertos, POCs reais e ferramentas que evoluem com a comunidade. PATH IA FOR DEVS e TECH 2026.
+Para a comunidade: esta sessão será gravada e publicada no YouTube da Pathbit, aberta a todos.
+Assista no youtube pathbit. Tags: conteúdos, pocs, ferramentas.
+O recado aqui é de ecossistema, não de produto: tudo que foi mostrado — permissões, gateway, combos — vive em repositório aberto e evolui com quem usa. E um aviso operacional: como a sessão é gravada e publicada, cheque o consentimento de gravação da turma antes de começar.
+
+## Referências e fontes
+Conteúdos, ferramentas e fontes desta sessão, tudo aberto e clicável.
+Onde se aprofundar: todos os conteúdos da Pathbit estão no repositório, clona, roda e contribui.
+Links e fontes: pathbit-ai-for-devs (todo o conteúdo), 9router, code.claude.com/docs, ollama.com, ai.google dev, antigravity.google, deepclaude, openrouter.ai, groq.com, mistral.ai, swebench.com, arena.ai, designarena.ai.
+Use a aba Fontes deste treinamento como página viva: ela organiza os 9 links principais em 3 grupos (benchmarks, conteúdos passo a passo e licença) e abre tudo em nova aba. Para benchmarks que mudam todo trimestre, prefira sempre a fonte ao print congelado do slide.
+
+## Encerramento
+Modelos vão e vêm, a arquitetura fica.
+Obrigado! Os conteúdos estão no repositório, clona, roda e vamos conversar.
+Hashtag #FaleComAPath. Contatos: tecnologia@pathbit.com.br, www.pathbit.com.br
+Essa frase de fechamento resume o treinamento inteiro: modelos são substituíveis, a arquitetura (harness, cascata, fallback) permanece. É o que justifica investir horas em permissões, gateway e resiliência em vez de decorar o modelo da moda. Deixe os contatos visíveis e convide para continuar a conversa no repositório.
+
+## Sua licença gemini
+Para acompanhar as POCs e usar os modelos de fronteira no dia a dia, solicite sua licença Google AI Pro (Gemini + Antigravity).
+Passo 1 — criar conta Google com e-mail Pathbit: sites.google.com/pathbit.co/ajuda/google/criar-conta-google
+Passo 2 — solicitar licença Gemini: logar no navegador com conta @pathbit.co ou @pathbit.com.br, abrir forms.gle/P8iBIdGEyyvwcUZS7 (QR no slide e na aba Fontes).
+A licença cobre Gemini 3.x, Antigravity IDE e a CLI agy.
+Detalhe que trava muita gente: o passo 2 só funciona logado com o e-mail @pathbit.co ou @pathbit.com.br no navegador — com conta pessoal o form não anda. Resolvida a licença, as PoCs 2 e 3 destravam: gateway com cota, 1M de contexto e custo zero de inferência extra.

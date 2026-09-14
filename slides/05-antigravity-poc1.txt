@@ -1,0 +1,23 @@
+Neste módulo você vai aprender autonomia com segurança: o motor de permissões do Agent 2.0 (deny > ask > allow), os 6 wildcards do modo irrestrito e o roteiro de 15 min da PoC 1 com reversão segura.
+
+## Antigravity irrestrito
+Parametrizamos o motor de permissões do Agent 2.0 (deny maior que ask maior que allow) com 6 wildcards: IDE, CLI e projetos, nos 3 sistemas.
+Zero diálogos de confirmação: agentes com autonomia de execução total.
+Conteúdo completo: github.com/pathbit/pathbit-ai-for-devs
+O motor funciona em precedência: deny vence ask, ask vence allow. Com os 6 wildcards liberando IDE, CLI e pastas de projeto nos 3 sistemas, o agente para de pedir confirmação e passa a executar direto — é isso que "irrestrito" significa aqui.
+Diagrama do slide: bloqueio -> Agent 2.0 -> decisão -> execução imediata.
+Atenção de segurança: autonomia total exige backup e restore ensaiados antes de qualquer tarefa real. Nunca rode esse modo em máquina com dados sensíveis sem isolamento — use ambiente dedicado para a PoC.
+
+## PoC 1 — antigravity (15 min)
+Vamos destravar o Agent 2.0 ao vivo e rodar uma tarefa completa sem nenhuma confirmação manual.
+O que vamos fazer: autonomia real com reversão segura — backup automático antes, um comando para voltar atrás.
+O formato de 15 minutos é proposital: tempo suficiente para ver o agente trabalhar sozinho e curto o bastante para repetir. O ponto alto é o health_report marcando ALL_GRANTED — a prova visível de que as permissões estão todas liberadas antes da tarefa autônoma.
+
+## Roteiro PoC 1
+1. dry-run do setup de permissões
+2. `verify_permissions.py`
+3. health_report: ALL_GRANTED
+4. apply + backup automático
+5. tarefa autônoma no agy
+6. `restore_permissions.py --latest`
+Siga nesta ordem, sem pular o dry-run: ele mostra o que vai mudar antes de mudar. O backup automático é a rede de segurança — qualquer problema, um comando de restore volta tudo. Roteiro fiel ao slide, sem credenciais. Ao final, a turma deve saber repetir sozinha: verificar, aplicar, executar, reverter.
